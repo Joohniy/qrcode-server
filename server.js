@@ -34,11 +34,13 @@ app.post('/generate', async (req, res) => {
 
 });
 
-app.get('/user/:id', async (req, res) => {
-  const { id } = req.body;
+app.get('/user/id', async (req, res) => {
+  const { _id } = req.body;
   const user = new DataBaseQR(req.body);
 
-  const locatedById = await user.findUserById(id);
+  console.log(_id);
+
+  const locatedById = await user.findUserById(_id);
 
   res.json({
     locatedUserId: locatedById
@@ -47,7 +49,7 @@ app.get('/user/:id', async (req, res) => {
 
 app.on('pronto', () => {
     app.listen(3001, () => {
-      console.log('Servidor iniciado http://192.168.56.1:3001/');
+      console.log('Servidor iniciado http://172.20.3.200:3001');
     });
   });
 
