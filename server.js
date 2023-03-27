@@ -34,7 +34,7 @@ app.post('/generate', async (req, res) => {
 
 });
 
-app.post('/qrpage', async (req, res) => {
+app.get('/user/:id', async (req, res) => {
   const { id } = req.body;
   const user = new DataBaseQR(req.body);
 
@@ -44,9 +44,6 @@ app.post('/qrpage', async (req, res) => {
     locatedUserId: locatedById
   });
 });
-
-app.get('/user', async (req, res) => {
-  });
 
 app.on('pronto', () => {
     app.listen(3001, () => {
