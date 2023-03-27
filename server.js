@@ -12,15 +12,15 @@ mongoose.set('strictQuery', true);
 const connectionString = 'mongodb+srv://msjoao:joao25081997@joao.j7wmqw7.mongodb.net/BD?retryWrites=true&w=majority'
 
 mongoose.connect(connectionString)
-  .then(() => {
-    app.emit('pronto');
+.then(() => {
+  app.emit('pronto');
   });
-
+  
+app.use(cors()); 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors()); 
 
-app.post('/generate', async (req, res) => {
+app.post('/createuser', async (req, res) => {
   const { name, linkedin, github } = req.body;
   const user = new DataBaseQR(req.body);
 
@@ -34,13 +34,11 @@ app.post('/generate', async (req, res) => {
 
 });
 
-app.get('/user/id', async (req, res) => {
-  const { _id } = req.body;
+app.get('/user/:id', async (req, res) => {
+  const userId = req.params['id'];
   const user = new DataBaseQR(req.body);
-
-  console.log(_id);
-
-  const locatedById = await user.findUserById(_id);
+   
+  const locatedById = await user.findUserById(userId);
 
   res.json({
     locatedUserId: locatedById
