@@ -36,7 +36,7 @@ app.post('/createuser', async (req, res) => {
 
 app.get('/user/:id', async (req, res) => {
   const userId = req.params['id'];
-  const user = new DataBaseQR(req.body);
+  const user = new DataBaseQR();
    
   const locatedById = await user.findUserById(userId);
 
